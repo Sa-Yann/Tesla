@@ -1,28 +1,34 @@
 import React from 'react';
 import styled from 'styled-components';
 import './../index.css';
+import Fade from 'react-reveal/Fade'; // Importing Fade effect
 
 function Section({title, description, backgroundImg, topBottomText, bottomButtonText}) {
     return (
         <Wrap bckGrndImg={backgroundImg}>
-            <ItemText>
-                <h1>{title}</h1>
-                <p>{description}</p>
-            </ItemText>
+            <Fade bottom>
+                <ItemText>
+                    <h1>{title}</h1>
+                    <p>{description}</p>
+                </ItemText>
+            </Fade>
+
             <Buttons>
-                <ButtonGroup>
-                    <TopButton>
-                        {topBottomText}
-                    </TopButton>
-                    {
-                        bottomButtonText && 
-                        // Only display BottomButton if it exist in the props declared in the Section Component in The Home Component
-                            <BottomButton>
-                                {bottomButtonText}
-                            </BottomButton>
-                    }
-                    
+                <Fade bottom>
+                    <ButtonGroup>
+                        <TopButton>
+                            {topBottomText}
+                        </TopButton>
+                        {
+                            bottomButtonText && 
+                            // Only display BottomButton if it exist in the props declared in the Section Component in The Home Component
+                                <BottomButton>
+                                    {bottomButtonText}
+                                </BottomButton>
+                        }   
                 </ButtonGroup>
+                </Fade>
+
                 <DownArrow src="/images/down-arrow.svg" />
             </Buttons>
             

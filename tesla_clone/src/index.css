@@ -11,6 +11,10 @@ body {
   overflow-x: hidden; /* arrow fine tuning*/
 }
 
+a {
+  text-decoration: none;
+}
+
 @keyframes animateDown {
   0%, 20%, 50%, 80%, 100% {
     transform: translateY(0);
