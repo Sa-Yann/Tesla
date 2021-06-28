@@ -1,9 +1,13 @@
-import React from 'react';
+import React, {useState} from 'react';
 import styled from 'styled-components';
 import MenuIcon from '@material-ui/icons/Menu';
+import CloseIcon from '@material-ui/icons/Close';
 
 
 function Header() {
+
+    const [burgerState, setBurgerState] =  useState(false)
+
     return (
         <Container>
             <a href="www.abc.com">
@@ -18,8 +22,21 @@ function Header() {
             <RightMenu>
                 <a href="www.abc.com">Shop</a>
                 <a href="www.abc.com">tesla account</a>
-                <BurgerMenu />
+                <BurgerMenu onClick={()=>setBurgerState(true)}/>
             </RightMenu>
+            <BurgerNav show={burgerState}>
+                <CloseWrapper>
+                    <CloseButton onClick={()=>setBurgerState(false)}/>
+                </CloseWrapper>
+                
+                <li><a href="#">Existing Inventory</a></li>
+                <li><a href="#">Used Inventory</a></li>
+                <li><a href="#">Trade-in</a></li>
+                <li><a href="#">Cybertruck</a></li>
+                <li><a href="#">Roadster</a></li>
+                <li><a href="#">Semi</a></li>
+                <li><a href="#">Charging</a></li>
+            </BurgerNav>
         </Container>
     )
 }
@@ -28,6 +45,7 @@ export default Header
 
 
 const Container = styled.div`
+    z-index: 10;
     min-height: 60px;
     position: fixed;
     display: flex;
@@ -69,4 +87,35 @@ const RightMenu = styled.div`
 const BurgerMenu = styled(MenuIcon)`
     cursor: pointer
 
+`
+
+const BurgerNav = styled.div`
+    z-index: 20;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    background: white;
+    width: 300px; 
+    list-style: none;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    text-align: start;
+    transform: ${ props => props.show ? `translateX(0)`: `translateX(100%)`};
+    transition: transform 0.2s;
+    li {
+        padding: 15px 0;
+        border-bottom: 1px solid rgba(0, 0 , 0, .2);
+        font-weight: 600;
+    }
+`
+
+const CloseButton = styled(CloseIcon)`
+    cursor: pointer;
+`
+
+const CloseWrapper = styled.div`
+        display: flex;
+        justify-content: flex-end;
 `
