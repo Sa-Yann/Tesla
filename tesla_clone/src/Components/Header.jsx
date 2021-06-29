@@ -2,11 +2,16 @@ import React, {useState} from 'react';
 import styled from 'styled-components';
 import MenuIcon from '@material-ui/icons/Menu';
 import CloseIcon from '@material-ui/icons/Close';
+import {selectCars} from './../features/car/carSlice';
+import { useSelector } from 'react-redux';
 
 
 function Header() {
 
-    const [burgerState, setBurgerState] =  useState(false)
+    const [burgerState, setBurgerState] =  useState(false);
+
+    const cars = useSelector(selectCars);
+    console.log("🚀 ~ file: Header.jsx ~ line 14 ~ Header ~ cars", cars)
 
     return (
         <Container>
@@ -14,10 +19,13 @@ function Header() {
                 <img src="/images/logo.svg" alt="logo"/>
             </a>
             <Menu>
-                <p><a href="www.abc.com">Model S</a></p>
+                {cars && cars.map((cars, index)=> (
+                    <p key={index}><a  href={cars}>{cars}</a></p>
+                    ))}
+                {/* <p><a href="www.abc.com">Model S</a></p>
                 <p><a href="www.abc.com">Model 3</a></p>
                 <p><a href="www.abc.com">Model X</a></p>
-                <p><a href="www.abc.com">Model Y</a></p>
+                <p><a href="www.abc.com">Model Y</a></p> */}
             </Menu>
             <RightMenu>
                 <a href="www.abc.com">Shop</a>
@@ -28,7 +36,9 @@ function Header() {
                 <CloseWrapper>
                     <CloseButton onClick={()=>setBurgerState(false)}/>
                 </CloseWrapper>
-                
+                {cars && cars.map((cars, index)=> (
+                    <li key={index}><a  href="www.abc.com">{cars}</a></li>
+                    ))}
                 <li><a href="#">Existing Inventory</a></li>
                 <li><a href="#">Used Inventory</a></li>
                 <li><a href="#">Trade-in</a></li>

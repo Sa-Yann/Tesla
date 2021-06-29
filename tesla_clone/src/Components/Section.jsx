@@ -2,13 +2,23 @@ import React from 'react';
 import styled from 'styled-components';
 import './../index.css';
 import Fade from 'react-reveal/Fade'; // Importing Fade effect
+import { useSelector } from 'react-redux';
+import {selectCars} from './../features/car/carSlice';
 
 function Section({title, description, backgroundImg, topBottomText, bottomButtonText}) {
+
+    const handleChange = () => {
+        
+    }
+
+    const cars = useSelector(selectCars);
+    
+    
     return (
         <Wrap bckGrndImg={backgroundImg}>
             <Fade bottom>
                 <ItemText>
-                    <h1>{title}</h1>
+                    <h1 id={cars}>{title}</h1>
                     <p>{description}</p>
                 </ItemText>
             </Fade>
@@ -29,7 +39,7 @@ function Section({title, description, backgroundImg, topBottomText, bottomButton
                 </ButtonGroup>
                 </Fade>
 
-                <DownArrow src="/images/down-arrow.svg" />
+                <DownArrow src="/images/down-arrow.svg" onClick={() => handleChange()}/>
             </Buttons>
             
             
